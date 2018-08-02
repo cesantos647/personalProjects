@@ -14,16 +14,12 @@ function sort() {
 		//pushes the first number into the sorted array
 		sortedList.push(unsortedList[0]);
 
-	} else {
-
-		//does nothing
-		return false;
-
 	}
 
 	//checks the whole list
 	for(var i = 1; i < unsortedList.length; i++) {
 
+		//resets sorting method
 		check = true;
 
 		//checks if the number in the unsorted array is a number
@@ -32,9 +28,10 @@ function sort() {
 			//checks if greater than the number and goes on until it find a place where it is greater than all previous areas
 			while(check === true) {
 
+				//checks each item in the array until var check is false
 				for(var z = 0; z < sortedList.length && check === true; z++) {
 
-					if(unsortedList[i] > sortedList[z]) {
+					if(unsortedList[i] > sortedList[z] || z === sortedList.length) {
 						
 						//pushes the item in the correct place
 						sortedList.splice(z, 0, unsortedList[i]);
@@ -42,10 +39,6 @@ function sort() {
 						//stops cycle
 						check = false
 
-					} else {
-
-						check = true
-					
 					}
 
 			}
