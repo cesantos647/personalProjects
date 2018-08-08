@@ -30,7 +30,7 @@ function encode() {
 	}
 
 	//Gets shift number that was submitted
-	shift = parseInt(document.getElementById('shift').value);
+	shift = parseInt(document.getElementById('key').value);
 
 	//Checks if shift number is actually a number
 	if(isNaN(shift) === true ) {
@@ -45,7 +45,7 @@ function encode() {
 	document.getElementById("messages").innerHTML = 'Message: ' + message;
 
 	//Displays shift number
-	document.getElementById("shifts").innerHTML = 'Shift Number: ' + shift;
+	document.getElementById("keys").innerHTML = 'Shift Number: ' + shift;
 
 	//Splits message into array of words
 	message = message.split(' ');
