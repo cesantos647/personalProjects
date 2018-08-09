@@ -1,3 +1,5 @@
+<!doctype html>
+<!-- Please remember that you can only call functions from other files if they were loaded before the file that needs to call the function -->
 <html>
 
   <head>
@@ -7,6 +9,18 @@
   </head>
 
   <body>
+
+  	<select id = 'option_check' onchange="check()">
+  		<option value = '' disabled selected> Encryption or Decryption? </option>
+  		<option value = 'Encrypt'>Encrypt </option>
+  		<option value = 'Decrypt'> Decrypt </option>
+  	</select>
+
+  	<select id = 'yeet' onchange="check()">
+  		<option value = '' disabled selected> Pick a Cipher </option>
+  		<option value = 'Caesar'> Caesar Cipher </option>
+  		<option value = 'Hill'> Hill Cipher </option>
+  	</select>
 
   	<p id = 'messages'>  </p>
 
