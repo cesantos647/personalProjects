@@ -114,7 +114,11 @@ function encode() {
 
 
 function check() {
+
 	var selector = document.getElementById('option_check');
+    
     var value = selector[selector.selectedIndex].value;
+	
 	console.log(value);
+
 }
