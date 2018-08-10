@@ -1,38 +1,49 @@
 <!doctype html>
+
 <!-- Please remember that you can only call functions from other files if they were loaded before the file that needs to call the function -->
+
 <html>
 
   <head>
 
-  	 <script src='project1.js'></script>
+  	 <script type = 'text/javascript' src = 'caesar.js'></script>
+  	 <script type="text/javascript" src = 'checking.js'></script>
 
   </head>
 
   <body>
 
-  	<select id = 'option_check' onchange="check()">
+  	<select id = 'version_check' onchange="change_option()">
+
   		<option value = '' disabled selected> Encryption or Decryption? </option>
+
   		<option value = 'Encrypt'>Encrypt </option>
+  		
   		<option value = 'Decrypt'> Decrypt </option>
+  	
   	</select>
 
-  	<select id = 'yeet' onchange="check()">
+  	<select id = 'cipher_check' onchange="change_option()">
+  	
   		<option value = '' disabled selected> Pick a Cipher </option>
+  	
   		<option value = 'Caesar'> Caesar Cipher </option>
+  	
   		<option value = 'Hill'> Hill Cipher </option>
+  	
   	</select>
 
-  	<p id = 'messages'>  </p>
+  	<p id = 'input'>  </p>
 
   	<p id = 'keys'>  </p>
 
-  	<p id = 'encryption'>  </p>
+  	<p id = 'output'>  </p>
 
-	<br>Your Message: <input type='text' id='message'/><br>
+	<p id = 'message_input'>Message</p> <input type='text' id='message'/>
 
- 	<br>Shift Number: <input type='text' id='key'/><br><br>
+ 	<p id = 'key_input'>Key</p><input type='text' id='key'/>
 
-	<button onclick="encode()">Submit</button>
+	<br><p><button onclick="execute()">Submit</button></p>
 
   </body>
  
