@@ -52,10 +52,14 @@ function gravity() {
 }
 
 function collision() {
-	for(var forEachCircle = 0; forEachCircle < circles.length; forEachCircle++) {
-		for(var forOtherCircles = 0; forOtherCircles < circles.length; forOtherCircles++) {
-			if(dist(circles[forEachCircle].xPos, circles[forOtherCircles].xPos, circles[forEachCircle].yPos, circles[forOtherCircles].yPos) >= (2* circleRadius)) {
-
+	if(circles.length > 1) {
+		for(var forEachCircle = 0; forEachCircle < circles.length; forEachCircle++) {
+			for(var forOtherCircles = 0; forOtherCircles < circles.length; forOtherCircles++) {
+				if(forEachCircle !== forOtherCircles){
+					if(dist(circles[forEachCircle].xPos, circles[forEachCircle].yPos, circles[forOtherCircles].xPos, circles[forOtherCircles].yPos) <= (circleRadius)) {
+						//bounce
+					}
+				}
 			}
 		}
 	}
@@ -67,4 +71,5 @@ function setup() {
 }
 function draw() {
 	gravity();
+	collision();
 }
