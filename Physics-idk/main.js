@@ -1,75 +1,167 @@
 var circles = [];
 
-var circleRadius = 50
+var circleRadius = 75
 
 var canvasWidth = 1000;
 
 var canvasHeight = 1000;
 
 function circle(xPos, xVel, xAcc, yPos, yVel, yAcc) {
+
 	this.xPos = xPos || random(100, 900);//(canvasWidth/2);
-	this.xVel = xVel || 20;
+
+	this.xVel = xVel || random(3, 15);
+
 	this.xAcc = xAcc || 0;
-	this.yPos = yPos || 0;
-	this.yVel = yVel || 0;
+
+	this.yPos = yPos || random(100,900);//0;
+
+	this.yVel = yVel || random(3, 15);
+
 	this.yAcc = yAcc || 5;
+
 }
 
 function addCirc() {
+
 	circles.push(new circle());
+
 }
 
-function resetCirc() {
-	for(var forEachObject = 0; forEachObject < circles.length; forEachObject++) {
-		circles[forEachObject].yPos = 0;
-		circles[forEachObject].yVel = 0;
-		circles[forEachObject].yAcc = 5;
-		ellipse(circles[forEachObject].xPos, circles[forEachObject].yPos, circleRadius);
+function lines() {
+	
+	stroke(200);
+	
+	for(var a = 0; a < circles.length; a++) {
+
+		for(var b = 0; b < circles.length; b++) {
+
+			line(circles[a].xPos, circles[a].yPos, circles[b].xPos, circles[b].yPos);
+
+
+		}
+
 	}
+
 }
 
 function gravity() {
+
 	background(0,0,0);
+
+	lines();
+
 	for(var forEachCircle = 0; forEachCircle < circles.length; forEachCircle++) {
+
 		ellipse(circles[forEachCircle].xPos, circles[forEachCircle].yPos, circleRadius);
-		if((circles[forEachCircle].yPos + (circleRadius + 5)) >= canvasHeight){
+
+		if((circles[forEachCircle].yPos + (circleRadius + 5)) >= canvasHeight || (circles[forEachCircle].yPos + (circleRadius + 5)) <= 0){
+
 			if(circles[forEachCircle].yVel >= circles[forEachCircle].yAcc){
+
 				circles[forEachCircle].yVel = -(circles[forEachCircle].yVel - circles[forEachCircle].yAcc);
+
 				circles[forEachCircle].yVel += circles[forEachCircle].yAcc;
+
 				circles[forEachCircle].yPos += circles[forEachCircle].yVel;
+
 			}
+
 		} else {
+
 			circles[forEachCircle].yVel += circles[forEachCircle].yAcc;
+
 			circles[forEachCircle].yPos += circles[forEachCircle].yVel;
+
 		}
+
 		if((circles[forEachCircle].xPos + (circleRadius + 5)) >= canvasWidth || (circles[forEachCircle].xPos - (circleRadius + 5)) <= 0){
+
 			circles[forEachCircle].xVel = -(circles[forEachCircle].xVel);
+
 			circles[forEachCircle].xPos += circles[forEachCircle].xVel;
+
 		} else {
+
 			circles[forEachCircle].xPos += circles[forEachCircle].xVel;
+
 		}
+
 	}
+
 }
 
-function collision() {
-	if(circles.length > 1) {
-		for(var forEachCircle = 0; forEachCircle < circles.length; forEachCircle++) {
-			for(var forOtherCircles = 0; forOtherCircles < circles.length; forOtherCircles++) {
-				if(forEachCircle !== forOtherCircles){
-					if(dist(circles[forEachCircle].xPos, circles[forEachCircle].yPos, circles[forOtherCircles].xPos, circles[forOtherCircles].yPos) <= (circleRadius)) {
-						//bounce
-					}
-				}
-			}
+function nonGravity() {
+
+	background(0,0,0);
+
+	findArea();
+
+	lines();
+
+	for(var forEachCircle = 0; forEachCircle < circles.length; forEachCircle++) {
+
+		if(circles[forEachCircle].xPos >= canvasWidth || circles[forEachCircle].xPos <= 0) {
+
+			circles[forEachCircle].xVel = -circles[forEachCircle].xVel;
+
+		} 
+
+		if(circles[forEachCircle].yPos >= canvasHeight || circles[forEachCircle].yPos <= 0) {
+
+			circles[forEachCircle].yVel = -circles[forEachCircle].yVel;
+
 		}
+
+		circles[forEachCircle].xPos += circles[forEachCircle].xVel;
+
+		circles[forEachCircle].yPos += circles[forEachCircle].yVel;
+
+		ellipse(circles[forEachCircle].xPos, circles[forEachCircle].yPos, circleRadius);
+
 	}
+
+}
+
+function findArea() {
+
+	if(circles.length === 3) {
+		var A = circles[0].xPos * (circles[1].yPos - circles[2].yPos);
+	
+		var B = circles[1].xPos * (circles[2].yPos - circles[0].yPos);
+	
+		var C = circles[2].xPos * (circles[0].yPos - circles[1].yPos);
+	
+		var total = A + B + C;
+	
+		var Area = Math.abs(total / 2);
+	
+		console.log(Area);
+
+		fill(255);
+		
+		triangle(circles[0].xPos, circles[0].yPos, circles[1].xPos, circles[1].yPos, circles[2].xPos, circles[2].yPos);
+	}
+
 }
 
 function setup() {
+
 	createCanvas(canvasWidth, canvasHeight);
+
 	frameRate(50);
+
 }
+
 function draw() {
-	gravity();
-	collision();
+
+	if(document.getElementById('checkbox_input').checked === true) {
+
+		gravity();
+
+	} else {
+		
+		nonGravity();
+
+	}
 }
