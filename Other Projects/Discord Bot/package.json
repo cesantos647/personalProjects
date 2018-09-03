@@ -1,0 +1,11 @@
+{
+	"name": "Chicken-Nugget",
+	"version": "1.0.0",
+	"description": "This is a chicken nugget bot",
+	"main": "bot.js",
+	"author": "Christian Santos",
+	"dependencies": {
+		"discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+		"winston": "^3.0.0"
+	}
+}
