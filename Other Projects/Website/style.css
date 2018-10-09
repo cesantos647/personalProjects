@@ -1,0 +1,27 @@
+body {
+	margin: 0;
+	height: 100%;
+}
+.container {
+	width: 100%;
+	height: 500px;
+	display: grid;
+	grid-template-columns: 2;
+}
+
+.left {
+	text-align: center;
+	grid-column: 1;
+	background-color: green;
+}
+
+.right {
+	text-align: center;
+	grid-column: 2;
+	background-color: pink;
+}
+
+button {
+	height: 10%;
+	width: 20%;
+}
